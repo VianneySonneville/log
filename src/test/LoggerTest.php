@@ -3,7 +3,15 @@ require __DIR__. '/../Entry.php';
 require __DIR__. '/../Logger.php';
 use Log\Logger;
 
-Logger::succes('This is a test succes');
-Logger::error('This is a test error');
-Logger::info('This is a test info');
-Logger::warning('This is a test warning');
+// for($i = 1; $i < 99999999; $i++){
+  Logger::succes('bis This is a test succes');
+  // Logger::error('bis This is a test error');
+//   Logger::info('bisThis is a test info');
+//   Logger::warning('This is a test warning');
+// }
+
+// $filename = __DIR__."/../log.log";
+
+// $file = file($filename);
+// $count = count($file);
+// echo $count;
