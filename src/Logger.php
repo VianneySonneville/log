@@ -7,6 +7,7 @@ class Logger {
   private static String $WARNING = "warning";
   private static String $SUCCES = "succes";
   private static String $ERROR = "error";
+  private static int $max_log = 2129400;
   private static String $file = __DIR__."/log.log";
   private static Array $logs = [];
 
@@ -51,9 +52,9 @@ class Logger {
       
       self::$logs[] = $entry;
 
+      // self::autoPurge();
       self::writeLog($entry);
       self::stdOut($entry);
-      self::autoPurge();
      }
 
     private static function writeLog(Entry $entry): void {
@@ -71,14 +72,25 @@ class Logger {
     }
 
     /**
-     * @description remove old line in file if file size is bigger than 100MB 2129400 lines approximate 100Mo
+     * remove old line in file if file size is bigger than 100MB (standard : 10000 lins )
      * return void
      */
     private static function autoPurge(): void {
-      if(count(file(self::$file)) > 2129400) {
-        $file = array_splice($file,-2129400);
+      // 2129400 lines approximate 100Mo
+      $filename = self::$file;
+      $file = file($filename);
+      $count = count($file);
+      echo "$count\n";
+      if($count > 2129400 ) {
+        $file = array_splice($file,(2129400 - 2129400 - (2129400 - 100)));
         file_put_contents($filename,$file); 
+      } else {
+
+        // die();
       }
+
+      // $count = count(file(self::$file));
+      // echo $count;
     }
 
     /** 
